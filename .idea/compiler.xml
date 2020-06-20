@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="demo02_servletContext" />
+        <module name="huzhu" />
+        <module name="filter02" />
+        <module name="jsp" />
+        <module name="Response" />
+        <module name="helloServlet" />
+        <module name="request" />
+        <module name="cookie" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="9">
+      <module name="empty" target="1.5" />
+      <module name="filter" target="13.0.2" />
+      <module name="helloServlet02" target="1.7" />
+      <module name="jsp02" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

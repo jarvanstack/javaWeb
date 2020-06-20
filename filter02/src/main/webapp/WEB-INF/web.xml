@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        metadata-complete="true"
+        version="4.0"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <!--编码过滤-->
+  <filter>
+    <filter-name>Filter01</filter-name>
+    <filter-class>com.bmft.filter.Filter01</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Filter01</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!--登录拦截过滤 sys 文件夹-->
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.bmft.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/sys/*</url-pattern>
+  </filter-mapping>
+  <!--监听器测试类ListenerTest01映射-->
+  <servlet>
+    <servlet-name>ListenerTest01</servlet-name>
+    <servlet-class>com.bmft.listener.ListenerTest01</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListenerTest01</servlet-name>
+    <url-pattern>/ListenerTest01</url-pattern>
+  </servlet-mapping>
+  <!--监听映射-->
+  <listener>
+    <listener-class>com.bmft.listener.Listener01</listener-class>
+  </listener>
+
+  <session-config>
+    <session-timeout>100</session-timeout>
+  </session-config>
+  <!--Login Servlet映射-->
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.bmft.loginInterception.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <!--LogOff Servlet映射-->
+  <servlet>
+    <servlet-name>LogOff</servlet-name>
+    <servlet-class>com.bmft.loginInterception.LogOff</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOff</servlet-name>
+    <url-pattern>/LogOff</url-pattern>
+  </servlet-mapping>
+</web-app>

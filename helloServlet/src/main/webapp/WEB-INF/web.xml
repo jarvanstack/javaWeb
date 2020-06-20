@@ -1,0 +1,49 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <!-- 一、注册  -->
+
+
+
+  <!-- 1.hello  -->
+  <servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>com.bmft.HelloServlet</servlet-class>
+  </servlet>
+  <!-- 2.hello  -->
+  <servlet>
+    <servlet-name>hello02</servlet-name>
+    <servlet-class>com.bmft.HelloServlet02</servlet-class>
+  </servlet>
+  <!-- 3.error  -->
+  <servlet>
+    <servlet-name>error</servlet-name>
+    <servlet-class>com.bmft.ErrorServlet</servlet-class>
+  </servlet>
+  <!-- 二、映射 -->
+
+
+  <!-- 1.hello -->
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <!-- 可以多个pattern映射到一个Servlet上面.-->
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello01</url-pattern>
+  </servlet-mapping>
+  <!-- 2.hello02 -->
+  <servlet-mapping>
+    <servlet-name>hello02</servlet-name>
+    <url-pattern>/hello02</url-pattern>
+  </servlet-mapping>
+  <!-- 3.error -->
+  <servlet-mapping>
+    <servlet-name>error</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        metadata-complete="true"
+        version="4.0"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <!-- 1. 首先配置web.xml的web应用初始化参数(例如） -->
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/mybatis</param-value>
+  </context-param>
+
+  <!-- 一、 -->
+  <servlet>
+    <servlet-name>get</servlet-name>
+    <servlet-class>com.bmft.GetContext</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>submit</servlet-name>
+    <servlet-class>com.bmft.Submit</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetInitParameter</servlet-name>
+    <servlet-class>com.bmft.GetInitParameter</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>page1</servlet-name>
+    <servlet-class>com.bmft.Page1</servlet-class>
+  </servlet>
+  <servlet>
+  <servlet-name>page2</servlet-name>
+  <servlet-class>com.bmft.Page2</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetResources1</servlet-name>
+    <servlet-class>com.bmft.GetResources1</servlet-class>
+  </servlet>
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>get</servlet-name>
+    <url-pattern>/get</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>submit</servlet-name>
+    <url-pattern>/submit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInitParameter</servlet-name>
+    <url-pattern>/GetInitParameter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>page1</servlet-name>
+    <url-pattern>/page1</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+  <servlet-name>page2</servlet-name>
+  <url-pattern>/page2</url-pattern>
+</servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>GetResources1</servlet-name>
+    <url-pattern>/GetResources1</url-pattern>
+  </servlet-mapping>
+
+</web-app>

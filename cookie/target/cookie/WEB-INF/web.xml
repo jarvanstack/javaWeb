@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        metadata-complete="true"
+        version="4.0"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+  <servlet>
+    <servlet-name>CookieLogin</servlet-name>
+    <servlet-class>com.bmft.cookies.CookieLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieLogin</servlet-name>
+    <url-pattern>/CookieLogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CleanCookie</servlet-name>
+    <servlet-class>com.bmft.cookies.CleanCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CleanCookie</servlet-name>
+    <url-pattern>/CleanCookie</url-pattern>
+  </servlet-mapping>
+
+<!-- ShowGoods -->
+  <servlet>
+    <servlet-name>ShowGoods</servlet-name>
+    <servlet-class>com.bmft.session.ShowGoods</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowGoods</servlet-name>
+    <url-pattern>/ShowGoods</url-pattern>
+  </servlet-mapping>
+
+<!-- AddGoods -->
+  <servlet>
+    <servlet-name>AddGoods</servlet-name>
+    <servlet-class>com.bmft.session.AddGoods</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddGoods</servlet-name>
+    <url-pattern>/AddGoods</url-pattern>
+  </servlet-mapping>
+
+  <!-- Cart -->
+  <servlet>
+    <servlet-name>Cart</servlet-name>
+    <servlet-class>com.bmft.session.Cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/Cart</url-pattern>
+  </servlet-mapping>
+
+
+
+</web-app>
