@@ -38,4 +38,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+
+  <!-- CAPTCHA02  带干扰线-->
+  <servlet>
+    <servlet-name>CAPTCHA02</servlet-name>
+    <servlet-class>com.bmft.CAPTCHA02</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CAPTCHA02</servlet-name>
+    <url-pattern>/CAPTCHA02</url-pattern>
+  </servlet-mapping>
 </web-app>

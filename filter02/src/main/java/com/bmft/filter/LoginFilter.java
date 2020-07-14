@@ -1,9 +1,8 @@
 package com.bmft.filter;
 
-import com.bmft.util.Constant;
+import com.bmft.util.ConstantFilter02;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,7 +23,7 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("=====LoginFilter过滤开始=====");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        if (request.getSession().getAttribute(Constant.USER_SESSION)==null){
+        if (request.getSession().getAttribute(ConstantFilter02.USER_SESSION)==null){
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             response.sendRedirect(request.getContextPath()+"/LogOff");
         }

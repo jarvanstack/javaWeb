@@ -7,9 +7,12 @@
     <file type="web" url="file://$PROJECT_DIR$/filter02" />
     <file type="web" url="file://$PROJECT_DIR$/helloServlet" />
     <file type="web" url="file://$PROJECT_DIR$/helloServlet02" />
+    <file type="web" url="file://$PROJECT_DIR$/InternetPlus" />
     <file type="web" url="file://$PROJECT_DIR$/jsp02" />
+    <file type="web" url="file://$PROJECT_DIR$/navigation_of_3D" />
     <file type="web" url="file://$PROJECT_DIR$/request" />
     <file type="web" url="file://$PROJECT_DIR$/Response" />
+    <file type="web" url="file://$PROJECT_DIR$/SMBMS_02" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -21,8 +24,10 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/InternetPlus/pom.xml" />
         <option value="$PROJECT_DIR$/empty/pom.xml" />
         <option value="$PROJECT_DIR$/filter/pom.xml" />
+        <option value="$PROJECT_DIR$/his/pom.xml" />
       </set>
     </option>
   </component>

@@ -1,6 +1,6 @@
 package com.bmft.loginInterception;
 
-import com.bmft.util.Constant;
+import com.bmft.util.ConstantFilter02;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class LogOff extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute(Constant.USER_SESSION,null);
+        req.getSession().setAttribute(ConstantFilter02.USER_SESSION,null);
         resp.sendRedirect("login.jsp");
 }
     @Override

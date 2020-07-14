@@ -8,7 +8,7 @@
   <!--编码过滤-->
   <filter>
     <filter-name>Filter01</filter-name>
-    <filter-class>com.bmft.filter.Filter01</filter-class>
+    <filter-class>com.bmft.filter.filter.Filter01</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>Filter01</filter-name>
@@ -17,7 +17,7 @@
   <!--登录拦截过滤 sys 文件夹-->
   <filter>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>com.bmft.filter.LoginFilter</filter-class>
+    <filter-class>com.bmft.filter.filter.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>

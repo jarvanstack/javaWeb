@@ -8,6 +8,7 @@
     <artifactId>javaweb</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>helloServlet</module>
         <module>helloServlet</module>
@@ -19,6 +20,10 @@
         <module>jsp</module>
         <module>filter02</module>
         <module>huzhu</module>
+        <module>navigation_of_3D</module>
+        <module>Topic_01_SIMS</module>
+        <module>SMBMS</module>
+        <module>SMBMS_02</module>
     </modules>
     <repositories>
          <repository>
@@ -79,7 +84,16 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <version>8.0.20</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0-M1</version>
+            <scope>test</scope>
         </dependency>
 
 

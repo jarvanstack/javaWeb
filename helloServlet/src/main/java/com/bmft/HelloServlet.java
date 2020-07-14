@@ -15,7 +15,6 @@ public class HelloServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");//设置客户端的接受方式
         PrintWriter writer = resp.getWriter();
         writer.println("你好HelloServlet");
-
     }
 
     @Override

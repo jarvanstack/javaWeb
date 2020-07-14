@@ -6,13 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo02_servletContext" />
+        <module name="navigation_of_3D" />
         <module name="huzhu" />
         <module name="filter02" />
         <module name="jsp" />
+        <module name="request" />
+        <module name="SMBMS" />
+        <module name="SMBMS_02" />
         <module name="Response" />
         <module name="helloServlet" />
-        <module name="request" />
+        <module name="Topic_01_SIMS" />
+        <module name="demo02_servletContext" />
         <module name="cookie" />
       </profile>
     </annotationProcessing>
@@ -20,6 +24,7 @@
       <module name="empty" target="1.5" />
       <module name="filter" target="13.0.2" />
       <module name="helloServlet02" target="1.7" />
+      <module name="his" target="1.5" />
       <module name="jsp02" target="1.7" />
     </bytecodeTargetLevel>
   </component>

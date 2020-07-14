@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图书馆室内导航</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8">
+		<style>
+			body{
+		    margin: 0;
+		    overflow: hidden;
+			}
+		</style>
+		<script src="js/three.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/GLTFLoader.js"></script>
+		<script src="js/stats.min.js"></script>
+		<script src="js/DeviceOrientationControls.js"></script>
+	
+		<script src="layui/layui.js"></script>
+		<script src="js/location.js"></script>
+		<script src="js/dijkstra2.js"></script>
+		<link rel="stylesheet" href="layui/css/layui.css">
+	
+	</head>
+	<body>
+		
+		<!-- 显示fps功能 -->
+		<div id="Stats-output" style="position: absolute;left: 430px;top: 15px;"></div>
+			<div style="position: absolute;top: 0px;width: 516px;height: 140px;  background-color:rgba(105,105,105,0.7);">
+			<form class="layui-form" action="" style="position: absolute;top: 15px;left: 5px;">
+			<div class="layui-form-item" style="width: 210px;text-align:center;font-size: 20px;">
+				<select name="interest" id="start" lay-filter="aihao" lay-search>
+					<option value="-1" selected="">请选择起始点</option>
+					<option value="0" >图书馆门口（内侧）</option>
+					<option value="1" >图书馆门口（外侧）</option>
+					<option value="3">科技图书阅览室</option>
+					<option value="6">社科图书阅览室</option>
+					<option value="11" >一楼厕所（左侧）</option>
+					<option value="15" >期刊分编室</option>
+					<option value="20" >一楼厕所（右侧）</option>
+					<option value="23">信息检索实验室</option>
+					<option value="26">阅读室</option>
+					<option value="31" >二楼厕所（左侧）</option>
+					<option value="35">数字法庭</option>
+					<option value="40">二楼厕所（右侧）</option>
+					<option value="47" >阅读室</option>
+					<option value="51" >光盘存储室</option>
+					<option value="54">设备维修室</option>
+					<option value="55">技术部</option>
+					<option value="56">运行维护部</option>
+					<option value="64">创新创业协会</option>
+				</select>
+				
+			  </div>	
+				  <div class="layui-form-item" style="width: 210px;text-align:center;position: absolute;left: 215px;top:0px;font-size: 20px; ">
+				  	<select name="interest" id="destination" style="background-color:rgba(0,128,0,0.7);" lay-filter="aihao" lay-search>
+					  <option value="-1" selected="">请选择终点</option>
+					  <option value="0" >图书馆门口（内侧）</option>
+					  <option value="1" >图书馆门口（外侧）</option>
+					  <option value="3">科技图书阅览室</option>
+					  <option value="6">社科图书阅览室</option>
+					  <option value="11" >一楼厕所（左侧）</option>
+					  <option value="15" >期刊分编室</option>
+					  <option value="20" >一楼厕所（右侧）</option>
+					  <option value="23">信息检索实验室</option>
+					  <option value="26">阅读室</option>
+					  <option value="31" >二楼厕所（左侧）</option>
+					  <option value="35">数字法庭</option>
+					  <option value="40">二楼厕所（右侧）</option>
+					  <option value="47" >阅读室2</option>
+					  <option value="51" >光盘存储室</option>
+					  <option value="54">设备维修室</option>
+					  <option value="55">技术部</option>
+					  <option value="56">运行维护部</option>
+					  <option value="64">创新创业协会</option>				  
+					 
+				  	</select>
+				    </div>	
+			</form>
+			<div style="position: absolute;top:15px;left: 10px;">
+			<div>
+				<button id="btn2" type="button" 	class="layui-btn layui-btn-radius " style="background-color:rgba(0,128,0,0.7); position: absolute;top:54px;left:135px;width: 120px;height: 50px;font-size: 20px;">开始导航</button>		  
+			</div>
+			<div >
+				 <button id="btn1" type="button" class="layui-btn layui-btn-radius  layui-btn-warm" style="background-color:rgba(255,140,0,0.7);position: absolute;top:54px;width: 120px;height: 50px;font-size: 20px;" >暂停导航</button>		  
+			</div>
+			
+			<div>
+				<button id="btn3" type="button" class="layui-btn layui-btn-normal layui-btn-radius" style="background-color:rgba(0,191,255,0.7);position: absolute;top:54px;left:270px;width: 120px;height: 50px;font-size: 20px;">重头播放</button>					  
+			</div>
+			</div>
+			<div style="position: absolute;left:20px;top:600%;">
+				<label id="time" style="position: absolute;bottom: 40px;left: 200px; background-color:rgba(0,0,0,0.2); font-size: 30px;color:white"></label>
+				<label id="distance" style=" background-color:rgba(0,0,0,0.2); font-size: 25px;color:white"></label>
+			</div>
+			<div class="layui-collapse" >
+			  <div class="layui-colla-item" style="width: 516px;position: absolute;top: 140px;">
+			    <h2 class="layui-colla-title" style="background-color:rgba(	119,136,153,0.7); color: white;font-size: 20px;">历史导航信息</h2>
+			    <div id="trail" class="layui-colla-content " style="background-color:rgba(105,105,105,0.5);"></div>
+			  </div>
+			</div>
+		</div>
+		
+		<script>
+		//场景基本变量
+		var scene;	
+		var camera;	
+		var renderer;	
+		//统计fps变量
+		var stats;	
+		//动画相关变量
+		var clock= new THREE.Clock();//时钟变量
+		let  I ;//点集索引
+		let  f ;//控制动画初始朝向变量
+		var donghua;//控制动画启动停止
+		var isStart=false;
+		/* 手机陀螺仪 */
+		var tly;
+		/* 获取导航时路径点 */
+		
+		/* 动画点集合 */
+		var points;
+		/* 导航时间和距离*/
+		var times;
+		var distance;
+		/* 模型名称 */
+		var xz=true;
+		/* 控制定位或导航 */
+		var location1=false;
+		var isLocation;//控制是否触发导航
+		/* 
+		 1.弄一个每个房间的三维坐标 数据集
+		 2.定位：扫码定位通过网址携带参数，通过参数获取定位地点，再通过调整相机位置实现定位
+		 3.导航：先从网页接收两个地点信息，再通过迪杰斯特拉算法计算两点间的最短路，获得路径经过点，再通过点获取对应三维坐标，最后根据三维坐标绘制曲线，实现导航效果
+		 4.获取距离，通过CatmullRomCurve3曲线获得长度，再根据模型比例转换得到路径长度
+		 5.获取时间：查询人平均的行走速度，再通过距离除以速度获取时间
+		 6.获取历史导航：每次导航时，将路径存储下来
+		 定位：获取url中的地址索引，通过索引查找出位置的坐标。
+		 导航：先获取 两个地点信息，根据地点获取一个位置索引，通过两个索引经过迪杰斯特拉算法获取路径索引，通过获得的索引查找坐标
+		 */
+		
+		
+	/* 获取位置信息 */
+		//实例化
+		var Request=new UrlSearch(); 
+		var placeIndex=Request.placeIndex;
+		/* 获取初始相机位置 */
+		var x=place[placeIndex].x,y=place[placeIndex].y,z=place[placeIndex].z;
+		/* 获取初始相机视角 */
+		var x1=place[placeIndex].x1,y1=place[placeIndex].y1,z1=place[placeIndex].z1;
+		/* 初始化相机位置 */
+		ini(x,y,z,x1,y1,z1);
+		var  controls = initControls();
+		if(true){
+			render();//渲染当前画面信息
+		}else{
+			//当点击导航时
+				//开始动画
+				//获取路径点集(传入点集)
+				isStart=true;
+				
+				var points=getPoints();
+				
+				f = false;
+				//两秒后f变为true;
+				setTimeout(() =>{
+					f = true
+				},2000)  ;
+				I=0;
+				animate();
+		}
+		
+		function ini(x,y,z,x1,y1,z1){
+			/* 初始化导航起始位置 */
+		
+			var selectID = document.getElementById("start");
+			var option = document.createElement("option");// 创建option元素   
+			option.appendChild(document.createTextNode("起始点:当前位置"));
+			option.setAttribute("value", placeIndex);
+			selectID.appendChild(option);
+			selectID[selectID.length-1].selected=true;
+			
+			/* 创建场景对象scene */
+			scene= new THREE.Scene();
+			/* 加载3D模型*/
+				var loader = new THREE.GLTFLoader();
+				loader.load( 'model/图书馆t.glb', function ( gltf ) {
+					scene.add( gltf.scene );
+					
+					console.log(gltf);
+					
+				}, undefined, function ( error ) {
+					console.error( error );
+				} );
+				
+			/* 背景 */
+			var urls = [
+				             'img/rt.png',            // left
+				             'img/lf.png',            // right
+				             'img/up.png',           // top
+				             'img/dn.png',           // bottom
+				             'img/bk.png',            // back
+				             'img/ft.png'           // frontp0
+				             
+				           ];
+				
+			var textureCube = new THREE.CubeTextureLoader().load( urls );
+			scene.background = textureCube; 
+			
+			
+			
+			/* 创建光源 */
+				/* 点光源 */
+				var point = new THREE.PointLight(0xffffff);
+				point.position.set(1000,6000,0);/* 光源位置  相对于模型：y上下，z为左右，x远近 */
+				point.castShadow = true;//开启灯光投射阴影
+				//scene.add(point);/* 将光源加入场景 */
+				
+				/* 环境光 */
+				var ambient = new THREE.AmbientLight(0xEDEDED);
+				//ambient.castShadow=true;
+				scene.add(ambient);
+				
+				
+
+			/* 创建相机 */
+				var w=window.innerWidth;/* 获取浏览器宽 */
+				var h=window.innerHeight;/* 获取浏览器高 */
+				var k=w/h;/* 窗口宽高比 */
+				var s=2;/* 三维场景显示范围控制系数，越大，范围越广 */
+				//var camera = new THREE.OrthographicCamera(-s*k,s*k,s,-s,1,1000);//正交投影
+				camera = new THREE.PerspectiveCamera(90,k,0.1,8000);//透视投影（人眼），参数：视野大小,长宽比,近景,远景
+				/* var x=-31,y=285,z=421; */
+				camera.position.set(x,y,z);/* x左右，y上下，z远近 */
+				//camera.lookAt(scene.position);
+	
+				/* 初始相机朝向 */
+				camera.lookAt(new THREE.Vector3(x1,y1,z1));
+			
+			/* 初始化手机陀螺仪 */
+				tly=new THREE.DeviceOrientationControls(camera);
+			
+			/* var axes= new THREE.AxisHelper(3000);
+			scene.add(axes); */
+			
+			/* 创建统计fps功能 */
+				 stats=new Stats();
+				stats.setMode(0);
+				stats.domElement.style.position="absolute";
+				stats.domElement.style.left="0px";
+				stats.domElement.style.top="0px";
+				document.getElementById("Stats-output").appendChild(stats.domElement);
+				
+				
+			/* 创建渲染器对象 */
+				renderer=new THREE.WebGLRenderer({
+				//增加下面两个属性，可以抗锯齿
+					antialias:true,
+					alpha:true
+				}); 
+				
+				//renderer.shadowMap.enabled = true;
+				renderer.setSize(w,h);/* 设置渲染尺寸 */
+				renderer.setClearColor(0xb9d3ff,1);/* 设置背景颜色，默认为黑色 */
+				document.body.appendChild(renderer.domElement);/* body元素中插入canvas对象 */	
+		}	
+			
+		function getPoints(pointsIndex){
+			// 通过类CatmullRomCurve3创建一个
+			var temp=new Array();
+			for(var i=0;i<pointsIndex.length;i++ ){
+				var X=place[pointsIndex[i]].x, Y=place[pointsIndex[i]].y, Z=place[pointsIndex[i]].z;
+				console.log("("+X+","+Y+","+Z+")");
+				temp[i]=new THREE.Vector3(X,Y,Z);
+			}
+			var curve = new THREE.CatmullRomCurve3(temp);
+			distance=((curve.getLength()*3)/100).toFixed(2);
+			times=(distance/1.1).toFixed(2);
+			// 样条曲线均匀分割100分，返回51个顶点坐标
+			var cutPoint=(500/35*distance).toFixed(0);
+			return curve.getSpacedPoints(cutPoint);
+		}
+		
+		
+		
+		/*  ***********/
+		function initControls() {
+			const  controls = new THREE.OrbitControls(camera, renderer.domElement);
+			// 如果使用animate方法时，将此函数删除
+			//controls.addEventListener( 'change', render );
+			// 使动画循环使用时阻尼或自转 意思是否有惯性
+			controls.enableDamping = true;
+			//动态阻尼系数 就是鼠标拖拽旋转灵敏度
+			controls.dampingFactor = 0.25;
+			//是否可以缩放
+			controls.enableZoom = true;
+			//是否自动旋转
+			/* controls.autoRotate = true;
+			controls.autoRotateSpeed = 0.3; */
+			//设置相机距离原点的最远距离
+			controls.minDistance = 1;
+			//设置相机距离原点的最远距离
+			controls.maxDistance = 10000;
+			//是否开启右键拖拽
+			//controls.enablePan = true
+			return controls
+		}
+		/* 扫码定位陀螺仪函数 */
+		function render(){
+			stats.update();
+			/* 去掉注释即可开启陀螺仪 */
+			tly.update();
+			renderer.render(scene,camera);
+			
+			//scene.rotateY(0.01);
+			
+			isLocation= requestAnimationFrame(render);/* 请求再次执行render(),这里不采用定时刷新是因为计算机资源可能被占用，所以在定时时间可能来不及调用，所以这个函数是请求计算机有资源即调用 */
+		}
+		
+		
+		/* 动画函数 */
+		function animate() {
+			renderer.render(scene,camera);
+			donghua=requestAnimationFrame(animate);
+			stats.update();
+			if(f){
+				camera.position.set(points[I].x,points[I].y,points[I].z)
+				camera.lookAt(points[I+1].x,points[I+1].y,points[I+1].z)
+				I = I < points.length -2  ? I+1 : 0
+			}else{
+				//controls.update() //controls更新的时候 会一直看原点
+				camera.lookAt(new THREE.Vector3(0,0, 0));
+			}
+		}
+		/* 获取url中的参数 */
+		function UrlSearch() 
+		{
+		   var placeIndex,value; 
+		   //取得复整个制地址栏
+		   var str=location.href; 
+		   var num=str.indexOf("?") 
+		   //取得所有参数   stringvar.substr(start [, length ]
+		   str=str.substr(num+1); 
+		   //各个参知数放到数组里
+		   var arr=str.split("&");
+		   for(var i=0;i < arr.length;i++){ 
+		    num=arr[i].indexOf("="); 
+		    if(num>0){ 
+		     placeIndex=arr[i].substring(0,num);
+		     value=arr[i].substr(num+1);
+		     this[placeIndex]=value;
+		     } 
+		    } 
+		} 
+		
+		
+		
+		
+		layui.use(['form', 'layedit', 'laydate','element','jquery','layer'], function() {
+			var form = layui.form,
+			layer = layui.layer,
+			element=layui.element,
+			$=layui.jquery;
+			$(document).on('click','#btn',function(){
+				
+				if(isStart){
+					isStart=false;
+					
+					cancelAnimationFrame(donghua);
+					isLocation= render();
+				}else{
+					isStart=true;
+					I=0;//i不设置为继续动画
+					cancelAnimationFrame(isLocation);
+					donghua=animate();
+					
+				}
+				
+			});
+			$(document).on('click','#btn1',function(){
+				
+				if(isStart){
+					isStart=false;
+					document.getElementById("btn1").innerHTML='继续导航';
+					cancelAnimationFrame(donghua);
+					isLocation= render();
+				}else{
+					isStart=true;
+					cancelAnimationFrame(isLocation);
+					donghua=animate();
+					document.getElementById("btn1").innerHTML='暂停导航';
+				}
+				
+			});
+			$(document).on('click','#btn2',function(){
+				
+			/* 	if(isStart){
+					isStart=false;
+					cancelAnimationFrame(donghua);
+					isLocation= render();
+				}else{ */
+				
+					isStart=true;
+					I=0;//i不设置为继续动画
+					cancelAnimationFrame(isLocation);
+					
+					/* 获得开始和目标点 */
+					var start=$("#start").val();
+					var destination=$("#destination").val();
+					if(start==destination){
+						return;
+					}
+					/* 获取起始点和目标点名称 */
+					var startName;
+					var destinationName;
+					var e1=document.getElementById("start");
+					var e2=document.getElementById("destination");
+					var tempText=getCurrentDate()+":   "+e1.options[e1.selectedIndex].text+" → "+e2.options[e2.selectedIndex].text;
+					
+					var node=document.createElement("LI");
+					var textnode=document.createTextNode(tempText);
+					node.style.fontSize='20px';
+					node.style.color="white";
+					node.appendChild(textnode);
+					document.getElementById("trail").appendChild(node);
+					
+					
+					
+					
+					/* 获取最短路径点的索引 */
+					var pointsIndex=Dijkstra( start,destination);
+					/* 通过索引找到动画点 */
+					points=getPoints(pointsIndex);
+					
+					
+					var geometry = new THREE.Geometry();
+					// 把从曲线轨迹上获得的顶点坐标赋值给几何体
+					geometry.vertices = points;
+					var material = new THREE.LineBasicMaterial({
+					  color: 'red'
+					});
+					var line = new THREE.Line(geometry, material);
+					//scene.add(line)
+					
+					
+					
+					
+					
+					f = false;
+					//两秒后f变为true;
+					setTimeout(() =>{
+						f = true
+					},100)  ;
+					I=0;
+					if(isStart){
+						cancelAnimationFrame(donghua);
+					}
+					donghua=animate();
+					
+				//}
+				
+				if(distance!=undefined){
+					document.getElementById("time").innerHTML="导航中";	
+					document.getElementById("distance").innerHTML="全程距离："+distance+"米——"+" 所需时间："+times+"秒";	
+					//document.getElementById("time").innerHTML="行走时间："+times+"秒";
+					
+				}
+				/*
+				  isStart=true;
+				  
+				  var points=getPoints();
+				  
+				  f = false;
+				  //两秒后f变为true;
+				  setTimeout(() =>{
+				  	f = true
+				  },2000)  ;
+				  i=0;
+				  animate();
+				  
+				  */
+			});
+			
+			
+			
+			$(document).on('click','#btn3',function(){
+				
+					if(!isStart){
+						alert("请先开始导航！");
+						return;
+					}
+				
+					isStart=true;
+					I=0;//i不设置为继续动画
+					cancelAnimationFrame(isLocation);
+					/* 获取最短路径点的索引 */
+					var pointsIndex=Dijkstra( start,destination);
+					/* 通过索引找到动画点 */
+					points=getPoints(pointsIndex);
+				
+					f = false;
+					//两秒后f变为true;
+					setTimeout(() =>{
+						f = true
+					},100)  ;
+					I=0;
+					if(isStart){
+						cancelAnimationFrame(donghua);
+					}
+					donghua=animate();
+					
+				//}
+				
+			});
+		});
+		
+		   function getCurrentDate() {
+		      var now = new Date();
+		      var year = now.getFullYear(); //得到年份
+		      var month = now.getMonth();//得到月份
+		      var date = now.getDate();//得到日期
+		      var day = now.getDay();//得到周几
+		      var hour = now.getHours();//得到小时
+		      var minu = now.getMinutes();//得到分钟
+		      var sec = now.getSeconds();//得到秒
+		      month = month + 1;
+		      if (month < 10) month = "0" + month;
+		      if (date < 10) date = "0" + date;
+		      if (hour < 10) hour = "0" + hour;
+		      if (minu < 10) minu = "0" + minu;
+		      if (sec < 10) sec = "0" + sec;
+		      var time = "";
+		      time = year + "-" + month + "-" + date+ " " + hour + ":" + minu + ":" + sec;		      
+		      return time;
+		    }
+		</script>
+
+	</body>
+</html>

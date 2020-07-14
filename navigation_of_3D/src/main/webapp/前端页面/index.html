@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>室内手机三维可视化导航系统</title>
+    <!-- layui -->
+    <link rel="stylesheet" href="lib\layui\css\layui.css">
+
+    <link rel="stylesheet" href="css\lib.css">
+    <link rel="stylesheet" href="css\road.css">
+
+    <style media="screen">
+      body{
+        background: url(images/bg_1.jpg);
+        background-size: cover;
+      }
+
+      .fn_1{
+        width: 250px; height: 220px;
+        background: url(images/fn_1.png);
+        background-size: cover;
+      }
+      .fn_1:hover{
+        background: url(images/fn_1_h.png);
+        background-size: cover;
+      }
+
+      .fn_2{
+        width: 250px; height: 220px;
+        background: url(images/fn_2.png);
+        background-size: cover;
+      }
+      .fn_2:hover{
+        background: url(images/fn_2_h.png);
+        background-size: cover;
+      }
+
+      .fn_3{
+        width: 250px; height: 220px;
+        background: url(images/fn_3.png);
+        background-size: cover;
+      }
+      .fn_3:hover{
+        background: url(images/fn_3_h.png);
+        background-size: cover;
+      }
+
+      .sci-wheel{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+      }
+
+      .header{
+        width: 100%; height: 100px; line-height: 100px;
+        padding: 0 40px;
+        background:rgba(0,0,0,0.3);
+      }
+      .header img{
+        float: left;
+        margin: 10px 10px;
+        width: 100px;
+      }
+      .header p{
+        float: left;
+        font-size: 30px; color: white;
+        letter-spacing: 3px;
+      }
+      .header .home-btn {
+        float: left;
+        margin-top: 20px;
+        width: 74px;
+        height: 74px;
+        border: 1px solid #102262;
+        border-radius: 5px;
+        background: url(images/login/icon.png) no-repeat center center;
+        background-size: 45% 45%;
+        cursor: pointer;
+      }
+      .center{
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        margin: auto;
+        width: 930px; height: 250px;
+        /* bottom: 300px; */
+      }
+      .center .list{
+        display: block;
+        float: left;
+        margin: 0 30px;
+      }
+      .center .list p{
+        text-align: center;
+        color: #00BAF1;
+        font-size: 18px;
+        margin-top: 240px;
+      }
+      /* .center .list img{
+        width: 250px;
+        margin: 0 30px;
+      } */
+    </style>
+  </head>
+  <body>
+
+
+    <div class="header">
+      <a href="#"><div class="home-btn"></div></a>
+
+      <img src="images\logo.png" alt="">
+      <p>三维可视化导航系统</p>
+    </div>
+
+    <img class="sci-wheel" src="images\sci.gif" alt="">
+
+    <div class="center">
+      <a class="list fn_1 moveUpDownFla1" href="http://47.93.208.250:100/navigation_of_3D/1.7.html?placeIndex=0
+      ">
+        <!-- <img src="images\fn_1.png" alt=""> -->
+        <p>重庆邮电大学数字图书馆</p>
+      </a>
+      <a class="list fn_2 moveUpDownFla2" href="http://47.93.208.250:100/navigation_of_3D/1.7.html?placeIndex=0
+      ">
+        <!-- <img src="images\fn_2.png" alt=""> -->
+        <p>2暂未开放</p>
+      </a>
+      <a class="list fn_3 moveUpDownFla1" href="http://47.93.208.250:100/navigation_of_3D/1.7.html?placeIndex=0
+      ">
+        <!-- <img src="images\fn_3.png" alt=""> -->
+        <p>3暂未开放</p>
+      </a>
+    </div>
+
+    <!--流星-->
+		<div class="liuxing liuxing1 liuxingFla"></div>
+		<div class="liuxing liuxing2 liuxingFla2"></div>
+		<div class="liuxing liuxing3 liuxingFla3"></div>
+		<div class="liuxing liuxing4 liuxingFla4"></div>
+  </body>
+
+  <!-- layui -->
+  <script type="text/javascript" src="lib\layui\layui.all.js"></script>
+</html>

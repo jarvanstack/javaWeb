@@ -1,0 +1,111 @@
+/* CSS Document */
+/**
+* +----------------------------------------------------------
+* 主样式
+* +----------------------------------------------------------
+*/
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: 微软雅黑;
+	letter-spacing: 1px;
+}
+html,body{
+	width: 100%; height: 100%;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+li{
+	list-style: none;
+}
+a{
+	display: block;
+}
+a:hover{
+	color: #df621e;
+	-webkit-transition: all 0.2s ease-in-out;
+}
+
+iframe{
+	border: 0; width: 100%; height: 100%;
+}
+.pull-left{ float: left; }
+.pull-right{ float: right; }
+
+.show{ display: block; }
+.hide{ display: none; }
+
+.i-bold{
+	font-weight: bolder;
+}
+/*字体颜色*/
+.i-green{ color:#00c851 !important;}
+.i-yellow{ color:#e7592b !important;}
+.i-red{ color:#d90000 !important; font-weight: border;}
+.i-blue{ color:#2292ef !important;}
+.i-lightblue{ color:#00a5e0 !important;}
+.i-gray{ color:#6c6c6e !important;}
+
+/*背景颜色*/
+.bg-green{ background-color:#00c851 !important;}
+.bg-yellow{ background-color:#e7592b !important;}
+.bg-red{ background-color:#d90000 !important;}
+.bg-blue{ background-color:#2292ef !important;}
+.bg-white{ background-color: white !important;}
+.bg-gray{ background-color: #6c6c6e !important;}
+
+/*渐变色*/
+.shade-white{
+	display: block;
+	background-image:url(../images/shade/white.png);
+	background-repeat:repeat-x;
+	background-size: 100% 100%;
+	background-position: 0 0;
+}
+.shade-menu{
+	display: block;
+	background-image:url(../images/shade/menu.png);
+	background-repeat:repeat-x;
+	background-size: 100% 100%;
+	background-position: 0 0;
+}
+
+.shadow{
+	box-shadow:0px 4px 8px rgba(0,0,0,0.3);
+}
+.shadow1{
+	background: url(../images/shadow.png);
+	width: 220px; height: 15px;
+	background-size: 100%;
+	background-position: 0 0;
+	position: absolute; bottom: -15px; left: 0;
+}
+.shadow2{
+	background: url(../images/shadow.png);
+	width: 100%; height: 15px;
+	background-size: 100%;
+	background-position: 0 -15px;
+	position: absolute; bottom: -15px; left: 0;
+}
+
+/* 数字提示 */
+.num{
+  width: 15px; height: 15px; text-align: center; line-height: 15px;
+  border-radius: 99px;
+  color: white; font-weight: bolder;
+}
+.num-1{
+	margin-left: 5px;
+  padding: 5px 10px; text-align: center; line-height: 15px;
+  border-radius: 99px;
+  color: white; font-weight: bolder;
+}
+
+/* layui修改 */
+.layui-input-block{
+	margin-left: 0;
+}
