@@ -163,20 +163,155 @@ public class ProviderDaoImpl implements ProviderDao {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                BaseDao.closeResources(connection, preparedStatement, resultSet);
             }
         }
         return providerList;
     }
 
-    @Test // 测试 参数获取 provider list \
-    //getProviderListByParams
-    public void test(){
-        Provider provider = new Provider();
-        provider.setProName("公");
-        provider.setProCode("");
-        List<Provider> providerList = getProviderListByParams(BaseDao.getConnection(), provider);
-        for (Provider provider1 : providerList) {
-            System.out.println(provider1.getProName());
+    /**
+     * 修改Provider
+     *
+     * @param connection
+     * @param provider
+     * @return
+     */
+    @Override
+    public boolean modifyProvider(Connection connection, Provider provider) throws SQLException {
+        boolean flag = false;
+        if (connection != null) {
+            PreparedStatement preparedStatement = null;
+            StringBuilder sql = new StringBuilder();
+            ArrayList<Object> params = new ArrayList<>();
+            String baseSql = "UPDATE `smbms`.`smbms_provider` \n" +
+                    "SET `proCode` = ?,\n" +
+                    "`proName` = ?,\n" +
+                    "`proDesc` = ?,\n" +
+                    "`proContact` = ?,\n" +
+                    "`proPhone` = ?,\n" +
+                    "`proAddress` = ?,\n" +
+                    "`proFax` = ?,\n" +
+                    "`createdBy` = ?,\n" +
+                    "`creationDate` = ?,\n" +
+                    "`modifyDate` = ?,\n" +
+                    "`modifyBy` = ? \n" +
+                    "WHERE\n" +
+                    "\t`id` = ? "; // 12 加上 最后id params = 12
+            sql.append(baseSql);
+            params.add(provider.getProCode());
+            params.add(provider.getProName());
+            params.add(provider.getProDesc());
+            params.add(provider.getProContact());
+            params.add(provider.getProPhone());
+            params.add(provider.getProAddress());
+            params.add(provider.getProFax());
+            params.add(provider.getCreatedBy());
+            params.add(provider.getCreationDate());
+            params.add(provider.getModifyDate());
+            params.add(provider.getModifyBy()); // 11
+            params.add(provider.getId()); // 12
+
+
+            preparedStatement = connection.prepareStatement(sql.toString());
+            int i = BaseDao.executeUpdate(preparedStatement, params.toArray());
+            if (i > 0) {
+                flag = true;
+            }
+            BaseDao.closeResources(connection,preparedStatement,null);
+
         }
+        return flag;
+    }
+
+    /**
+     * 删除
+     *
+     * @param connection f
+     * @param id d
+     * @return d
+     */
+    @Override
+    public boolean deleteProviderById(Connection connection, String id) throws SQLException {
+        boolean flag = false;
+        if (connection != null) {
+            PreparedStatement preparedStatement = null;
+            ArrayList<Object> params = new ArrayList<>();
+            StringBuilder sql = new StringBuilder();
+            String baseSql = "DELETE FROM `smbms`.`smbms_provider` WHERE `id` = ?";
+            sql.append(baseSql);
+            params.add(id);
+            //向上抛出 事务，rollback commit
+            preparedStatement = connection.prepareStatement(sql.toString());
+            int i = BaseDao.executeUpdate(preparedStatement, params.toArray());
+            if (i > 0) {
+                flag = true;
+            }
+        }
+
+        return  flag;
+    }
+
+    /**
+     * 修改Provider
+     *
+     * @param connection
+     * @param provider
+     * @return
+     */
+    @Override
+    public boolean addProvider(Connection connection, Provider provider) throws SQLException {
+        boolean flag = false;
+        if (connection != null) {
+            PreparedStatement preparedStatement = null;
+            StringBuilder sql = new StringBuilder();
+            ArrayList<Object> params = new ArrayList<>();
+            String baseSql = "INSERT INTO `smbms`.`smbms_provider` ( `proCode`, `proName`, `proDesc`, `proContact`, `proPhone`, `proAddress`, `proFax`, `createdBy`, `creationDate`, `modifyDate`, `modifyBy` )\n" +
+                    "VALUES\n" +
+                    "\t(\n" +
+                    "\t\t ?,\n" +
+                    "\t\t ?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t\t?,\n" +
+                    "\t?,\n" +
+                    "\t?)"; // 11 id自动生成
+            sql.append(baseSql);
+            params.add(provider.getProCode());
+            params.add(provider.getProName());
+            params.add(provider.getProDesc());
+            params.add(provider.getProContact());
+            params.add(provider.getProPhone());
+            params.add(provider.getProAddress());
+            params.add(provider.getProFax());
+            params.add(provider.getCreatedBy());
+            params.add(provider.getCreationDate());
+            params.add(provider.getModifyDate());
+            params.add(provider.getModifyBy()); // 11
+//            params.add(provider.getId()); // 12 id 自动生成
+
+
+            preparedStatement = connection.prepareStatement(baseSql);
+            int i = BaseDao.executeUpdate(preparedStatement, params.toArray());
+            if (i > 0) {
+                flag = true;
+            }
+            BaseDao.closeResources(connection,preparedStatement,null);
+
+        }
+        return flag;
+    }
+
+
+    @Test // 添加
+    public void test() throws SQLException {
+        Provider providerById = getProviderById(BaseDao.getConnection(), "5");
+        providerById.setProName("半亩方塘");
+        boolean b = addProvider(BaseDao.getConnection(), providerById);
+        System.out.println(b);
     }
 }

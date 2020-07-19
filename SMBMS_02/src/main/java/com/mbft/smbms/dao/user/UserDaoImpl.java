@@ -322,11 +322,14 @@ public class UserDaoImpl implements UserDao {
             //不为空且为数字
             if (StringUtil01.isNotNull(id) && StringUtil01.isInteger(id)) {
                 String sql = "SELECT\n" +
-                        "\tsmbms.smbms_user.*\n" +
+                        "\tsmbms.smbms_user.*, \n" +
+                        "\tsmbms.smbms_role.roleName\n" +
                         "FROM\n" +
-                        "\tsmbms.smbms_user\n" +
+                        "\tsmbms.smbms_user,\n" +
+                        "\tsmbms.smbms_role\n" +
                         "WHERE\n" +
-                        "\tsmbms_user.id = ?";
+                        "\tsmbms_user.userRole = smbms_role.id " +
+                        " and smbms_user.id  = ? ";
                 Object[] params = {id};
                 try {
                     preparedStatement = connection.prepareStatement(sql);
@@ -345,6 +348,7 @@ public class UserDaoImpl implements UserDao {
                         user.setCreationDate(resultSet.getDate("creationDate"));
                         user.setModifyBy(resultSet.getInt("modifyBy"));
                         user.setModifyDate(resultSet.getDate("modifyDate"));
+                        user.setUserRoleName(resultSet.getString("roleName"));
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

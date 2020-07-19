@@ -7,9 +7,13 @@
           <strong>你现在所在的位置是:</strong>
           <span>供应商管理页面 >> 供应商修改页</span>
       </div>
+      <!--这里可以打印错误信息-->
+      <h1 style="color:red;">${error}</h1>
       <div class="providerAdd">
           <form id="providerForm" name="providerForm" method="post" action="${pageContext.request.contextPath }/jsp/provider.do">
               <!--div的class 为error是验证错误，ok是验证成功-->
+              <input type="hidden" name="method" value="modifysave">
+              <input type="hidden" name="id" value="${provider.id }">
               <div class="">
                   <label for="proCode">供应商编码：</label>
                   <input type="text" name="proCode" id="proCode" value="${provider.proCode }" readonly="readonly"> 

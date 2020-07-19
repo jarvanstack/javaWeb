@@ -5,6 +5,8 @@ import com.mbft.smbms.dao.BaseDao;
 import com.mbft.smbms.dao.user.UserDao;
 import com.mbft.smbms.dao.user.UserDaoImpl;
 import com.mbft.smbms.pojo.User;
+import com.mbft.smbms.service.role.RoleService;
+import com.mbft.smbms.service.role.RoleServiceImpl;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -14,9 +16,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     //service层必然会调用DAO层的方法，所以提升到全局。
     private UserDao userDao;
+    private RoleService roleService ;
     //在构造器里面对userDao实例化为userDaoImpl
     public UserServiceImpl() {
         userDao = new UserDaoImpl();
+        roleService = new RoleServiceImpl();
     }
 
     /**

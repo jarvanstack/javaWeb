@@ -7,6 +7,7 @@
             <strong>你现在所在的位置是:</strong>
             <span>供应商管理页面</span>
         </div>
+	<h1 style="color:red;">${message}</h1>
         <div class="search">
         	<form method="get" action="${pageContext.request.contextPath }/jsp/provider.do">
 				<input name="method" value="query" type="hidden">

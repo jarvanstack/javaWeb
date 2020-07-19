@@ -3,6 +3,7 @@ package com.mbft.smbms.dao.provider;
 import com.mbft.smbms.pojo.Provider;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ProviderDao {
@@ -28,4 +29,28 @@ public interface ProviderDao {
      * @return
      */
     List<Provider> getProviderListByParams(Connection connection,Provider provider);
+
+    /**
+     * 修改Provider
+     * @param connection
+     * @param provider
+     * @return
+     */
+    boolean modifyProvider(Connection connection,Provider provider) throws SQLException;
+
+    /**
+     * 删除
+     * @param connection
+     * @param id
+     * @return
+     */
+    boolean deleteProviderById(Connection connection ,String id) throws SQLException;
+
+    /**
+     * add Provider
+     * @param connection
+     * @param provider
+     * @return
+     */
+    boolean addProvider(Connection connection,Provider provider) throws SQLException;
 }
