@@ -29,8 +29,10 @@ public class BaseDao {
      * 因为涉及到，statement的预编译问题，所以传入参数 预编译的数组Object[]
      */
     public static ResultSet executeQuery(PreparedStatement preparedStatement,Object[] params) throws SQLException {
-        for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i+1,params[i]);
+        if (params!=null && params.length>0) {//如果不为空且大于 0
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
         }
         return preparedStatement.executeQuery();
     }
@@ -42,8 +44,10 @@ public class BaseDao {
      * @return int 更新的行数
      */
     public static int executeUpdate(PreparedStatement preparedStatement,Object[] params) throws SQLException {
-        for (int i = 0; i < params.length; i++) {
-            preparedStatement.setObject(i+1,params[i]);
+        if (params!=null && params.length>0) {//如果不为空 且 大于 0
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
         }
         return preparedStatement.executeUpdate();
     }

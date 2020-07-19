@@ -11,7 +11,7 @@ public class User {
 	private Date birthday;  //出生日期
 	private String phone;   //电话
 	private String address; //地址
-	private Integer userRole;    //用户角色
+	private Integer userRole;    //用户角色的id，
 	private Integer createdBy;   //创建者
 	private Date creationDate; //创建时间
 	private Integer modifyBy;     //更新者

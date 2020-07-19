@@ -16,12 +16,34 @@ public class Bill {
 	private Integer createdBy; //创建者
 	private Date creationDate; //创建时间
 	private Integer modifyBy; //更新者
-	private Date modifyDate;//更新时间
+	private Date modifyDate;//更新时间 12
 	
 	private String providerName;//供应商名称
-	
-	
+	private void init(){
+		//初始化必要值
+		billCode = "";
+		productName = "";
+		productDesc = "";
+		productUnit = "";
+		billCode = "";
+		productCount = new BigDecimal("0");
+		totalPrice = new BigDecimal("0");
+		isPayment = 0;//1默认未支付
+		providerId = 0;
+		createdBy = 0;
+		creationDate = new Date();
+		modifyBy = 0;
+		modifyDate = new Date();
+		providerName = "";
+	}
+	public Bill() {
+		init();
+	}
+
 	public String getProviderName() {
+		//new ProviderServiceImpl().getProviderById(""+id).getProName()
+		//不要在pojo里调用Service层，
+		//这个值在Service层调用DAO层来实现
 		return providerName;
 	}
 	public void setProviderName(String providerName) {

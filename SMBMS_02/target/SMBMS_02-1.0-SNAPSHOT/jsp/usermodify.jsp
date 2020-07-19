@@ -7,8 +7,11 @@
             <span>用户管理页面 >> 用户修改页面</span>
         </div>
         <div class="providerAdd">
+            <!--message是修改是否成功的提示-->
+            <h1 style="color: red">${message}</h1>
         <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/jsp/user.do">
 			<input type="hidden" name="method" value="modifyexe">
+            <!--user是必须返回的数据，不然就消失了.-->
 			<input type="hidden" name="uid" value="${user.id }"/>
 			 <div>
                     <label for="userName">用户名称：</label>

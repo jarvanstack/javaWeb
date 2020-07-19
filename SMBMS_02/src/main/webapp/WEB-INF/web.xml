@@ -56,5 +56,22 @@
     <!--设置超时时间为30分钟-->
     <session-timeout>30</session-timeout>
   </session-config>
-
+  <!--jsp/bill.do请求-->
+  <servlet>
+    <servlet-name>BillServlet</servlet-name>
+    <servlet-class>com.mbft.smbms.servlet.bill.BillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BillServlet</servlet-name>
+    <url-pattern>/jsp/bill.do</url-pattern>
+  </servlet-mapping>
+<!--最后的供应商-->
+  <servlet>
+    <servlet-name>ProviderServlet</servlet-name>
+    <servlet-class>com.mbft.smbms.servlet.provider.ProviderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProviderServlet</servlet-name>
+    <url-pattern>/jsp/provider.do</url-pattern>
+  </servlet-mapping>
 </web-app>
