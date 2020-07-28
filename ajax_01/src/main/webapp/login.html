@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <!--用ajax需要导入jQuery的库-->
+    <script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<script>
+    function testForm() {
+        $.ajax({
+            type: "POST",
+            url:"localhost:8041/ajax_01_war_exploded/ajax01.do",
+            data:$('#fromTest').serialize(),
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                //接收后台返回的结果
+                if (data.message == "true") {
+                    alert("提交表单成功");
+                }else {
+                    alert("提交表单失败");
+                }
+            }
+        });
+    }
+    function login() {
+        let value = document.getElementById("username").value;
+        let path = $("#path").val();
+        console.log(value);
+        console.log("path:" + path);
+        $.ajax({
+            type: "post",
+            url: "localhost:8041/ajax_01_war_exploded/ajax01.do",
+            data: {method: "login", username: value},
+            //contentType:"application/json;charset=UTF-8",//contentType 发送前端数据的内容为
+            //接收数据
+            dataType: "json",//后端结束数据的内容为 json,返回的数据有问题，这里重新改下
+            //下面为发送请求手执行的内容
+            success: function (data) {
+                if (data.message == "true") {
+                    console.log(data.message);
+                    //如果返回 true
+                    alert("登录成功");
+                } else {
+                    alert("登录失败");
+                }
+            },
+            error: function (data) {
+                alert("error");
+            }
+        });//不要忘记这个结束号码
+
+    }
+    //测试
+    function testajax(){
+        let value = document.getElementById("username").value;
+        $.ajax({
+            type:"post",
+            url:"localhost:8041/ajax_01_war_exploded/ajax01.do",
+            contentType:"application/json;charset=UTF-8",
+            data: {method: "login", username: value},
+            //dataType:"json",
+            success:function(data){
+                alert("执行成功！")
+            }
+        });
+    }
+</script>
+<form id="fromTest" action="/ajax01.do">
+    <input  type="hidden" name="method" value="login"><br>
+    <input id="username" type="text"><br>
+    <button id="loginBtn" onclick="login()">点击登录</button>
+    <button id="testajax" onclick="testajax()">testajax</button>
+    <button type="submit">submit提交表单</button>
+</form>
+</body>
+</html>

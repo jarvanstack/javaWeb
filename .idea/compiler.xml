@@ -9,15 +9,16 @@
         <module name="jsp" />
         <module name="huzhu" />
         <module name="navigation_of_3D" />
-        <module name="helloServlet" />
-        <module name="filter02" />
         <module name="SMBMS" />
-        <module name="demo02_servletContext" />
-        <module name="Response" />
-        <module name="SMBMS_02" />
-        <module name="Topic_01_SIMS" />
-        <module name="request" />
+        <module name="filter02" />
         <module name="cookie" />
+        <module name="fileUpload" />
+        <module name="demo02_servletContext" />
+        <module name="SMBMS_02" />
+        <module name="Response" />
+        <module name="helloServlet" />
+        <module name="request" />
+        <module name="ajax_01" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
@@ -26,6 +27,9 @@
       <module name="helloServlet02" target="1.7" />
       <module name="his" target="1.5" />
       <module name="jsp02" target="1.7" />
+      <module name="sims_02" target="1.7" />
+      <module name="sims_1_0" target="1.5" />
+      <module name="Topic_01_SIMS" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

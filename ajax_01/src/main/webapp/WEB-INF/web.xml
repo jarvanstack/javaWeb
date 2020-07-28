@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <servlet>
+    <servlet-name>AjaxServlet01</servlet-name>
+    <servlet-class>com.ajax.servlet.AjaxServlet01</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjaxServlet01</servlet-name>
+    <url-pattern>/ajax01.do</url-pattern>
+  </servlet-mapping>
+  <!--/a01.do-->
+  <servlet>
+    <servlet-name>A01Servlet</servlet-name>
+    <servlet-class>com.ajax.servlet.A01Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>A01Servlet</servlet-name>
+    <url-pattern>/a01.do</url-pattern>
+  </servlet-mapping>
+
+
+
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+</web-app>
+

@@ -21,9 +21,10 @@
         <module>filter02</module>
         <module>huzhu</module>
         <module>navigation_of_3D</module>
-        <module>Topic_01_SIMS</module>
         <module>SMBMS</module>
         <module>SMBMS_02</module>
+        <module>ajax_01</module>
+        <module>fileUpload</module>
     </modules>
     <repositories>
          <repository>
@@ -95,7 +96,18 @@
             <version>5.7.0-M1</version>
             <scope>test</scope>
         </dependency>
-
+        <!--阿里巴巴fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.72</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

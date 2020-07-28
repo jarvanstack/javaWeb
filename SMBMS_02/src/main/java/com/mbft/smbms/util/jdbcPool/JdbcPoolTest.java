@@ -19,7 +19,7 @@ public class JdbcPoolTest {
             connection = JdbcPool02.getConnection();
             preStatement = connection.prepareStatement(sql);
             preStatement.setString(1,"admin");
-            preStatement.setString(2,"123456");
+            preStatement.setString(2,"1234567");
             resultSet = preStatement.executeQuery();
             while (resultSet.next()){
                 System.out.println(resultSet.getObject("userName"));
